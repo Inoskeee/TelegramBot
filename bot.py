@@ -131,8 +131,9 @@ def callback_worker(call):
 			backmenu(call)
 	if call.data == "endgame":
 		try:
+			user = users[call.from_user.id]
 			mes = 'Игра окончена!\nИтоговый счет: {} городов'.format(user.score)
-			users.pop(message.from_user.id)
+			users.pop(call.from_user.id)
 
 			key_start = types.InlineKeyboardButton(text='Начать сначала', callback_data='newgame')
 			keyboard.add(key_start)
