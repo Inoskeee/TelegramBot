@@ -1,5 +1,5 @@
 random
 json
-telebot
+pytelegrambotapi
 asyncio
 aiohttp
