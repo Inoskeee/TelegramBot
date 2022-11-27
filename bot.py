@@ -47,7 +47,7 @@ def backmenu(call):
 		key_help = types.InlineKeyboardButton(text='Правила игры', callback_data='gamerules')
 		keyboard.add(key_help)
 
-		bot.send_message(call.message.chat.id, text='Привет, я бот для игры в города! Нажми кнопку старт!', reply_markup=keyboard)
+		bot.send_message(call.message.chat.id, text='Привет, я бот для игры в города!\nНажми кнопку "Старт", чтобы начать игру!\nИли нажми кнопку "Правила игры", чтобы узнать правила.', reply_markup=keyboard)
 
 @bot.message_handler(commands=["start"])
 def send_command(message):
