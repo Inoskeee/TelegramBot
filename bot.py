@@ -78,6 +78,7 @@ def callback_worker(call):
 		user = User(randomCity, 0, 0)
 		users[call.from_user.id] = user
 		bot.send_message(call.message.chat.id, text=randomCity, reply_markup=keyboard)
+		print('User {} started the game'.format(call.from_user.id))
 
 	if call.data == "gamerules":
 		keyboard = types.InlineKeyboardMarkup()
@@ -127,6 +128,7 @@ def callback_worker(call):
 			else:
 				users[call.from_user.id] = user
 				bot.send_message(call.message.chat.id, text=user.currentBotCity, reply_markup=keyboard)
+			print('User {} missed the word'.format(call.from_user.id))
 		except:
 			backmenu(call)
 	if call.data == "endgame":
@@ -143,6 +145,7 @@ def callback_worker(call):
 			key_end = types.InlineKeyboardButton(text='В меню', callback_data='back')
 			keyboard.add(key_end)
 			bot.send_message(call.message.chat.id, text=mes, reply_markup=keyboard)
+			print('User {} completed the game'.format(call.from_user.id))
 		except:
 			backmenu(call)
 
