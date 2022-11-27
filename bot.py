@@ -193,12 +193,20 @@ def user_answer(message):
 						keyboard.add(key_end)
 						user.cities.append(message.text)
 						isFound = False
-						for city in cities:
-							if city.startswith(user.currentBotCity[-1].capitalize()) and city not in user.cities:
-								user.currentBotCity = city
-								user.cities.append(city)
-								isFound = True
-								break
+						if message.text[-1] not in chars:
+							for city in cities:
+								if city.startswith(message.text[-1].capitalize()) and city not in user.cities:
+									user.currentBotCity = city
+									user.cities.append(city)
+									isFound = True
+									break
+						else:
+							for city in cities:
+								if city.startswith(message.text[-2].capitalize()) and city not in user.cities:
+									user.currentBotCity = city
+									user.cities.append(city)
+									isFound = True
+									break
 						if isFound == False:
 							while(True):
 								randomCity = cities[random.randint(0, len(cities))]
@@ -261,12 +269,20 @@ def user_answer(message):
 						keyboard.add(key_end)
 						user.cities.append(message.text)
 						isFound = False
-						for city in cities:
-							if city.startswith(user.currentBotCity[-1].capitalize()) and city not in user.cities:
-								user.currentBotCity = city
-								user.cities.append(city)
-								isFound = True
-								break
+						if message.text[-1] not in chars:
+							for city in cities:
+								if city.startswith(message.text[-1].capitalize()) and city not in user.cities:
+									user.currentBotCity = city
+									user.cities.append(city)
+									isFound = True
+									break
+						else:
+							for city in cities:
+								if city.startswith(message.text[-2].capitalize()) and city not in user.cities:
+									user.currentBotCity = city
+									user.cities.append(city)
+									isFound = True
+									break							
 						if isFound == False:
 							while(True):
 								randomCity = cities[random.randint(0, len(cities))]
