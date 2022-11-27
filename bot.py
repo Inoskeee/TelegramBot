@@ -67,7 +67,7 @@ def callback_worker(call):
 		key_skip = types.InlineKeyboardButton(text='Пропустить', callback_data='skip')
 		keyboard.add(key_skip)
 
-		key_end = types.InlineKeyboardButton(text='Закончить игру', callback_data='back')
+		key_end = types.InlineKeyboardButton(text='Закончить игру', callback_data='endgame')
 		keyboard.add(key_end)
 
 		cities = []
@@ -99,7 +99,7 @@ def callback_worker(call):
 		key_skip = types.InlineKeyboardButton(text='Пропустить', callback_data='skip')
 		keyboard.add(key_skip)
 
-		key_end = types.InlineKeyboardButton(text='Закончить игру', callback_data='back')
+		key_end = types.InlineKeyboardButton(text='Закончить игру', callback_data='endgame')
 		keyboard.add(key_end)
 		try:
 			user = users[call.from_user.id]
