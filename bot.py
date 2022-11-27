@@ -63,22 +63,33 @@ def send_command(message):
 def callback_worker(call):
 	global users
 	if call.data == "newgame":
-		keyboard = types.InlineKeyboardMarkup()
-		key_skip = types.InlineKeyboardButton(text='Пропустить', callback_data='skip')
-		keyboard.add(key_skip)
+		if call.message.chat.id not in users:
+			keyboard = types.InlineKeyboardMarkup()
+			key_skip = types.InlineKeyboardButton(text='Пропустить', callback_data='skip')
+			keyboard.add(key_skip)
 
-		key_end = types.InlineKeyboardButton(text='Закончить игру', callback_data='endgame')
-		keyboard.add(key_end)
+			key_end = types.InlineKeyboardButton(text='Закончить игру', callback_data='endgame')
+			keyboard.add(key_end)
 
-		cities = []
-		pathFile = 'russian-cities.json'
-		with open(pathFile, 'r', encoding='utf-8') as f:
-			cities = json.load(f)
-		randomCity = cities[random.randint(0, len(cities))]['name']
-		user = User(randomCity, 0, 0)
-		users[call.from_user.id] = user
-		bot.send_message(call.message.chat.id, text=randomCity, reply_markup=keyboard)
-		print('User {} started the game'.format(call.from_user.id))
+			cities = []
+			pathFile = 'russian-cities.json'
+			with open(pathFile, 'r', encoding='utf-8') as f:
+				cities = json.load(f)
+			randomCity = cities[random.randint(0, len(cities))]['name']
+			user = User(randomCity, 0, 0)
+			users[call.from_user.id] = user
+			bot.send_message(call.message.chat.id, text=randomCity, reply_markup=keyboard)
+			print('User {} started the game'.format(call.from_user.id))
+		else:
+			keyboard = types.InlineKeyboardMarkup()
+			key_skip = types.InlineKeyboardButton(text='Пропустить', callback_data='skip')
+			keyboard.add(key_skip)
+
+			key_end = types.InlineKeyboardButton(text='Закончить игру', callback_data='endgame')
+			keyboard.add(key_end)
+			user = users[call.from_user.id]
+			msg = 'Вы уже начали игру!\nТекущее слово: "{}"'.format(user.currentBotCity)
+			bot.send_message(call.message.chat.id, text=msg, reply_markup=keyboard)
 
 	if call.data == "gamerules":
 		keyboard = types.InlineKeyboardMarkup()
